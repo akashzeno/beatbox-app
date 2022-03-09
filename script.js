@@ -58,16 +58,20 @@ let beats = {
  * Function to play the beat upon a press of key
  * HINT: use the keyCode
  */
-triggerBeat = (event) => {
-	const key = event.key.toLowerCase();
+function triggerBeat(event) {
+    const key = event.type === "click" ? event.target.id : event.key.toLowerCase();
 	if (key in beats) {
 		beats[key].beat.play();
 		beats[key].button.select();
 	}
-};
+}
 
 /**
  * Keydown listener to fire triggerBeat function
  * HINT: Log the keyCode of the key
  */
 document.addEventListener("keydown", triggerBeat);
+
+document.querySelectorAll(".button").forEach((button) => {
+    button.addEventListener("click", triggerBeat);
+});
